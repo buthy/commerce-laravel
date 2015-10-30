@@ -15,19 +15,60 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::pattern('id','[0-9]+');
+
 Route::group(['prefix' => 'admin'], function() {
 
-    Route::get('categories', ['as'=>'admin/categories', 'uses'=>'AdminCategoriesController@index']);
-    Route::get('products', ['as'=>'admin/products', 'uses'=>'AdminProductsController@index']);
+    Route::group(['prefix' => 'categories'], function() {
+        Route::get('', ['as'=>'admin/categories/list', 'uses'=>'AdminCategoriesController@index']);
+        Route::get('create', ['as'=>'admin/categories/create', 'uses'=>'AdminCategoriesController@index']);
+        Route::post('save', ['as'=>'admin/categories/save', 'uses'=>'AdminCategoriesController@save']);
+        Route::get('edit/{id}', ['as'=>'admin/categories/edit', 'uses'=>'AdminCategoriesController@index']);
+        Route::put('update/{id}', ['as'=>'admin/categories/update', 'uses'=>'AdminCategoriesController@index']);
+        Route::get('delete/{id}', ['as'=>'admin/categories/delete', 'uses'=>'AdminCategoriesController@index']);
+    });
+
+    Route::group(['prefix' => 'products'], function() {
+        Route::get('', ['as'=>'admin/products/list', 'uses'=>'AdminProductsController@index']);
+        Route::get('create', ['as'=>'admin/products/create', 'uses'=>'AdminProductsController@index']);
+        Route::post('save', ['as'=>'admin/products/save', 'uses'=>'AdminProductsController@save']);
+        Route::get('edit/{id}', ['as'=>'admin/products/edit', 'uses'=>'AdminProductsController@index']);
+        Route::put('update/{id}', ['as'=>'admin/products/update', 'uses'=>'AdminProductsController@index']);
+        Route::get('delete/{id}', ['as'=>'admin/products/delete', 'uses'=>'AdminProductsController@index']);
+    });
 
 });
 
-/*
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'
 ]);
 
+// ? significa que pode ou nao ter um id
+// $id = null significa que o valor padrao caso nao exista id sera null
+// no where significa que o id devera conter numeros de 0-9, ao colocar [A-Za-z] somente letras
+// o + significa pelo menos um caractere
+/*
+Route::get('user/{id?}', function($id = null) {
+    if ($id)
+        return "Olá ".$id;
+
+    return "Não possui ID";
+})->where('id', '[0-9]+');
+*/
+
+// caso queira cadastrar um padrao, sempre que existir um campo id ser numerico
+// Route::pattern('id', '[0-9]+');
+
+// passa o objeto na url
+// para funcionar precisa cadastrar o objeto category na RouteServiceProvider
+/*
+Route::get('category/{category}', function(\CodeCommerce\Category $category) {
+    return $category->name;
+});
+*/
+
+/*
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'posts'], function() {
