@@ -15,8 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController'
+]);
+
 Route::pattern('id','[0-9]+');
 
+Route::get('categories', ['as' => 'categories', 'uses' => 'CategoriesController@index']);
+Route::post('categories/store', ['as' => 'categories.store', 'uses' => 'CategoriesController@store']);
+Route::get('categories/create', ['as' => 'categories.create', 'uses' => 'CategoriesController@create']);
+Route::get('categories/{id}/destroy', ['as' => 'categories.destroy', 'uses' => 'CategoriesController@destroy']);
+Route::get('categories/{id}/edit', ['as' => 'categories.edit', 'uses' => 'CategoriesController@edit']);
+Route::put('categories/{id}/update', ['as' => 'categories.update', 'uses' => 'CategoriesController@update']);
+
+Route::get('products', ['as' => 'products', 'uses' => 'ProductsController@index']);
+Route::post('products/store', ['as' => 'products.store', 'uses' => 'ProductsController@store']);
+Route::get('products/create', ['as' => 'products.create', 'uses' => 'ProductsController@create']);
+Route::get('products/{id}/destroy', ['as' => 'products.destroy', 'uses' => 'ProductsController@destroy']);
+Route::get('products/{id}/edit', ['as' => 'products.edit', 'uses' => 'ProductsController@edit']);
+Route::put('products/{id}/update', ['as' => 'products.update', 'uses' => 'ProductsController@update']);
+
+/*
 Route::group(['prefix' => 'admin'], function() {
 
     Route::group(['prefix' => 'categories'], function() {
@@ -38,11 +58,7 @@ Route::group(['prefix' => 'admin'], function() {
     });
 
 });
-
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController'
-]);
+*/
 
 // ? significa que pode ou nao ter um id
 // $id = null significa que o valor padrao caso nao exista id sera null
