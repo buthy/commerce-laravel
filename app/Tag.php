@@ -4,17 +4,16 @@ namespace CodeCommerce;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Tag extends Model
 {
 
     protected $fillable = [
-        'name',
-        'description'
+        'name'
     ];
 
     public function products()
     {
-        return $this->hasMany('CodeCommerce\Product');
+        return $this->belongsToMany('CodeCommerce\Product');
     }
 
 }

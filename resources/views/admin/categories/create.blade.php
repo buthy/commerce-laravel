@@ -17,7 +17,7 @@
             </ul>
         @endif
 
-        {!! Form::open(['route' => 'categories.store']) !!}
+        {!! Form::open(['route' => 'admin.categories.store']) !!}
 
         @include('admin.categories._form')
 

@@ -9,7 +9,7 @@
 
         <h1>Produtos</h1>
 
-        <a href="{{ route('products.create') }}" class="btn btn-success">Novo produto</a>
+        <a href="{{ route('admin.products.create') }}" class="btn btn-success">Novo produto</a>
         <br><br>
         <table class="table table-responsive table-bordered">
             <tr>
@@ -29,8 +29,9 @@
                 <td>{{ $product->price }}</td>
                 <td>{{ str_limit($product->description, $limit = 50, $end = '...') }}</td>
                 <td>
-                    <a href="{{ route('products.edit', ['id' => $product->id ]) }}" class="btn btn-sm btn-default">Editar</a>
-                    <a href="{{ route('products.destroy', ['id' => $product->id ]) }}" class="btn btn-sm btn-danger">Excluir</a>
+                    <a href="{{ route('admin.products.images', ['id' => $product->id ]) }}" class="btn btn-sm btn-default">Imagens</a>
+                    <a href="{{ route('admin.products.edit', ['id' => $product->id ]) }}" class="btn btn-sm btn-default">Editar</a>
+                    <a href="{{ route('admin.products.destroy', ['id' => $product->id ]) }}" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
             @endforeach

@@ -17,12 +17,13 @@
             </ul>
         @endif
 
-        {!! Form::open(['route' => 'products.store']) !!}
+        {!! Form::open(['route' => 'admin.products.store']) !!}
 
         @include('admin.products._form')
 
         <div class="form-group">
             {!! Form::submit('Adicionar', ['class' => 'btn btn-primary']) !!}
+            <a href="{{ route('admin.products.index') }}" class="btn btn-default">Cancelar</a>
         </div>
 
         {!! Form::close() !!}

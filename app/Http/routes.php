@@ -22,43 +22,35 @@ Route::controllers([
 
 Route::pattern('id','[0-9]+');
 
-Route::get('categories', ['as' => 'categories', 'uses' => 'CategoriesController@index']);
-Route::post('categories/store', ['as' => 'categories.store', 'uses' => 'CategoriesController@store']);
-Route::get('categories/create', ['as' => 'categories.create', 'uses' => 'CategoriesController@create']);
-Route::get('categories/{id}/destroy', ['as' => 'categories.destroy', 'uses' => 'CategoriesController@destroy']);
-Route::get('categories/{id}/edit', ['as' => 'categories.edit', 'uses' => 'CategoriesController@edit']);
-Route::put('categories/{id}/update', ['as' => 'categories.update', 'uses' => 'CategoriesController@update']);
-
-Route::get('products', ['as' => 'products', 'uses' => 'ProductsController@index']);
-Route::post('products/store', ['as' => 'products.store', 'uses' => 'ProductsController@store']);
-Route::get('products/create', ['as' => 'products.create', 'uses' => 'ProductsController@create']);
-Route::get('products/{id}/destroy', ['as' => 'products.destroy', 'uses' => 'ProductsController@destroy']);
-Route::get('products/{id}/edit', ['as' => 'products.edit', 'uses' => 'ProductsController@edit']);
-Route::put('products/{id}/update', ['as' => 'products.update', 'uses' => 'ProductsController@update']);
-
-/*
 Route::group(['prefix' => 'admin'], function() {
 
     Route::group(['prefix' => 'categories'], function() {
-        Route::get('', ['as'=>'admin/categories/list', 'uses'=>'AdminCategoriesController@index']);
-        Route::get('create', ['as'=>'admin/categories/create', 'uses'=>'AdminCategoriesController@index']);
-        Route::post('save', ['as'=>'admin/categories/save', 'uses'=>'AdminCategoriesController@save']);
-        Route::get('edit/{id}', ['as'=>'admin/categories/edit', 'uses'=>'AdminCategoriesController@index']);
-        Route::put('update/{id}', ['as'=>'admin/categories/update', 'uses'=>'AdminCategoriesController@index']);
-        Route::get('delete/{id}', ['as'=>'admin/categories/delete', 'uses'=>'AdminCategoriesController@index']);
+        Route::get('', ['as'=>'admin.categories.index', 'uses'=>'CategoriesController@index']);
+        Route::post('', ['as'=>'admin.categories.store', 'uses'=>'CategoriesController@store']);
+        Route::get('create', ['as'=>'admin.categories.create', 'uses'=>'CategoriesController@create']);
+        Route::get('{id}/edit', ['as'=>'admin.categories.edit', 'uses'=>'CategoriesController@edit']);
+        Route::put('{id}/update', ['as'=>'admin.categories.update', 'uses'=>'CategoriesController@update']);
+        Route::get('{id}/destroy', ['as'=>'admin.categories.destroy', 'uses'=>'CategoriesController@destroy']);
     });
 
     Route::group(['prefix' => 'products'], function() {
-        Route::get('', ['as'=>'admin/products/list', 'uses'=>'AdminProductsController@index']);
-        Route::get('create', ['as'=>'admin/products/create', 'uses'=>'AdminProductsController@index']);
-        Route::post('save', ['as'=>'admin/products/save', 'uses'=>'AdminProductsController@save']);
-        Route::get('edit/{id}', ['as'=>'admin/products/edit', 'uses'=>'AdminProductsController@index']);
-        Route::put('update/{id}', ['as'=>'admin/products/update', 'uses'=>'AdminProductsController@index']);
-        Route::get('delete/{id}', ['as'=>'admin/products/delete', 'uses'=>'AdminProductsController@index']);
+        Route::get('', ['as'=>'admin.products.index', 'uses'=>'ProductsController@index']);
+        Route::post('', ['as'=>'admin.products.store', 'uses'=>'ProductsController@store']);
+        Route::get('create', ['as'=>'admin.products.create', 'uses'=>'ProductsController@create']);
+        Route::get('{id}/edit', ['as'=>'admin.products.edit', 'uses'=>'ProductsController@edit']);
+        Route::put('{id}/update', ['as'=>'admin.products.update', 'uses'=>'ProductsController@update']);
+        Route::get('{id}/destroy', ['as'=>'admin.products.destroy', 'uses'=>'ProductsController@destroy']);
+
+        Route::group(['prefix' => 'images'], function() {
+            Route::get('{id}/images', ['as'=>'admin.products.images', 'uses'=>'ProductsController@images']);
+            Route::get('{id}/images/create', ['as'=>'admin.products.images.create', 'uses'=>'ProductsController@createImage']);
+            Route::post('{id}/images/store', ['as'=>'admin.products.images.store', 'uses'=>'ProductsController@storeImage']);
+            Route::get('{id}/images/destroy', ['as'=>'admin.products.images.destroy', 'uses'=>'ProductsController@destroyImage']);
+        });
+
     });
 
 });
-*/
 
 // ? significa que pode ou nao ter um id
 // $id = null significa que o valor padrao caso nao exista id sera null

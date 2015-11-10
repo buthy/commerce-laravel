@@ -20,7 +20,7 @@
             </ul>
         @endif
 
-        {!! Form::model($category, ['route' => ['categories.update', $category->id], 'method' => 'put']) !!}
+        {!! Form::model($category, ['route' => ['admin.categories.update', $category->id], 'method' => 'put']) !!}
 
         @include('admin.categories._form')
 
