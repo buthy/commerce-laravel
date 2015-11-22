@@ -26,7 +26,25 @@ class StoreController extends Controller
         $categories = $this->modelCategory->all();
         $featured   = $this->modelProduct->featured()->limit(3)->orderBy(DB::raw('RAND()'))->get();
         $recommend  = $this->modelProduct->recommend()->limit(3)->orderBy(DB::raw('RAND()'))->get();
+
         return view('store.index', compact('categories', 'featured', 'recommend'));
+    }
+
+    public function category($id)
+    {
+        $categories = $this->modelCategory->all();
+        $category = $this->modelCategory->find($id);
+        $products = $this->modelProduct->ofCategory($id)->get();
+
+        return view('store.category', compact('categories', 'category', 'products'));
+    }
+
+    public function product($id)
+    {
+        $categories = $this->modelCategory->all();
+        $product = $this->modelProduct->find($id);
+
+        return view('store.product', compact('categories', 'product'));
     }
 
 }
