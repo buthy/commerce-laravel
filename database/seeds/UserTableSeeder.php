@@ -13,7 +13,7 @@ class UserTableSeeder extends Seeder
             [
                 'name' => 'Marcus David',
                 'email' => 'suporte@marcusdavid.com.br',
-                'password' => bcrypt('Mdavid-1903@suporte'),
+                'password' => bcrypt('mdads3'),
                 'remember_token' => str_random(10),
             ]
         );

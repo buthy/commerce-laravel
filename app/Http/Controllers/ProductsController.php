@@ -5,6 +5,7 @@ namespace CodeCommerce\Http\Controllers;
 use CodeCommerce\Category;
 use CodeCommerce\Product;
 use CodeCommerce\ProductImage;
+use CodeCommerce\Tag;
 use Illuminate\Http\Request;
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
@@ -38,6 +39,7 @@ class ProductsController extends Controller
         $data = $request->all();
         $product = $this->model->fill($data);
         $product->save();
+        $product->tags()->sync($this->getTagsIds($request->tags));
         return redirect('admin/products');
     }
 
@@ -51,6 +53,8 @@ class ProductsController extends Controller
     public function update(Requests\ProductRequest $request, $id)
     {
         $this->model->find($id)->update($request->all());
+        $product = $this->model->find($id);
+        $product->tags()->sync($this->getTagsIds($request->tags));
         return redirect('admin/products');
     }
 
@@ -64,6 +68,10 @@ class ProductsController extends Controller
                 }
                 $image->delete();
             }
+        }
+        if ($product->tags) {
+            $tags = $product->tags;
+            $tags->delete();
         }
         $product->delete();
         return redirect('admin/products');
@@ -100,6 +108,16 @@ class ProductsController extends Controller
         $image->delete();
 
         return redirect()->route('admin.products.images', ['id' => $product->id]);
+    }
+
+    public function getTagsIds($tags)
+    {
+        $tagList = array_filter(array_map('trim', explode(',', $tags)));
+        $tagsIDs = [];
+        foreach($tagList as $tagName){
+            $tagsIDs[] = Tag::firstOrCreate(['name' => $tagName])->id;
+        }
+        return $tagsIDs;
     }
 
 }

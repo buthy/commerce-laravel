@@ -25,6 +25,11 @@
         @include('admin.products._form')
 
         <div class="form-group">
+            {!! Form::label('tags', 'Tags:') !!}
+            {!! Form::text('tags', $product->tagList, ['class' => 'form-control', 'placeholder' => 'Separe as tags por vírgula']) !!}
+        </div>
+
+        <div class="form-group">
             {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
             <a href="{{ route('admin.products.index') }}" class="btn btn-default">Cancelar</a>
         </div>

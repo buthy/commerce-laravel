@@ -28,6 +28,8 @@ Route::pattern('id','[0-9]+');
 
 Route::group(['prefix' => 'admin'], function() {
 
+    Route::get('/', 'ProductsController@index');
+
     Route::group(['prefix' => 'categories'], function() {
         Route::get('', ['as'=>'admin.categories.index', 'uses'=>'CategoriesController@index']);
         Route::post('', ['as'=>'admin.categories.store', 'uses'=>'CategoriesController@store']);
