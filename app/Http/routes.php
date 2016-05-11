@@ -21,12 +21,14 @@ Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'Checkout
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController'
+    'password' => 'Auth\PasswordController',
+    'test' => 'TestController'
 ]);
 
 Route::pattern('id','[0-9]+');
 
-Route::group(['prefix' => 'admin'], function() {
+// Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'where' => ['id' => '[0-9]+']], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::get('/', 'ProductsController@index');
 

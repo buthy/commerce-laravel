@@ -40,6 +40,6 @@ $factory->define(CodeCommerce\Product::class, function (Faker\Generator $faker) 
 
 $factory->define(CodeCommerce\Tag::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->name,
     ];
 });

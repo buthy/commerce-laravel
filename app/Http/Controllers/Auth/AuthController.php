@@ -21,6 +21,9 @@ class AuthController extends Controller
     |
     */
 
+    // if authenticated redirects to
+    protected $redirectTo = '/admin/products';
+
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
