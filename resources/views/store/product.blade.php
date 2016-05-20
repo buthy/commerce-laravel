@@ -35,6 +35,11 @@
                 <div class="product-information">
                     <h2>{{ $product->name }} <small>{{ $product->category->name }}</small></h2>
                     <p>{{ $product->description }}</p>
+                    <p>
+                        @foreach ($product->tags as $tag)
+                            <a href="{{ route('store.tag', ['id' => $tag->id]) }}" class="label label-primary">{{ $tag->name }}</a>
+                        @endforeach
+                    </p>
                     <span>
                         <span>R$ {{ money_format('%.2n', $product->price) }}</span>
                         <a href="{{ route('cart.add', ['id' => $product->id]) }}" class="btn btn-fefault cart">
