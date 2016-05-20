@@ -55,7 +55,7 @@ class StoreController extends Controller
         $categories = $this->modelCategory->all();
         $tag = $this->modelTag->find($id);
 
-        $products = $tag->products();
+        $products = $tag->products;
 
         return view('store.tag', compact('categories', 'products', 'tag'));
     }

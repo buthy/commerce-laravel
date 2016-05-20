@@ -13,7 +13,7 @@
         <div class="features_items">
             <h2 class="title text-center">{{ $tag->name }}</h2>
 
-            @include('store.partial.product', ['products' => $products])
+            @include('store.partial.products', ['products' => $products])
 
         </div>
     </div>
